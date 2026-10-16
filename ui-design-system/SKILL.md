@@ -1,156 +1,128 @@
 ---
 name: ui-design-system
 description: >-
-  Enforces comprehensive UI/UX standardization, Design Tokens, atomic component reuse,
-  and visual consistency across web and desktop applications. Use this skill whenever
-  designing new screens, creating UI components, styling layouts, or reviewing frontend code
-  to ensure 100% aesthetic coherence and professional polish.
+  [CRITICAL UI ARCHITECTURAL GATE - MANDATORY ATOMIC COMPONENT STANDARDIZATION & ZERO-RAW-HTML INVARIANCE]
+  Enforces comprehensive UI/UX standardization, Design Tokens, atomic component reuse, and project-level design consistency.
+  TUYỆT ĐỐI CẤM VIẾT THẺ THÔ (<input>, <button>, <select>, <textarea>) khi thiết kế giao diện.
+  KHI THIẾT KẾ COMPONENT MỚI HOẶC TÁI THIẾT KẾ, AI BẮT BUỘC PHẢI HỎI VÀ XÁC NHẬN VỚI NGƯỜI DÙNG ĐỂ THIẾT LẬP LÀM CHUẨN DUY NHẤT CHO TOÀN BỘ DỰ ÁN ĐÓ.
+  Mỗi dự án sở hữu bộ component chuẩn độc lập tại @/components/ui, không bao giờ nhầm lẫn thiết kế giữa các dự án chạy song song.
+  The AI agent MUST view and execute this skill whenever designing new screens, creating UI components, styling layouts, or reviewing frontend code.
 ---
 
-# UI Design System & Visual Standardization Skill
+# UI Design System & Project-Level Component Standardization Skill
 
-This skill guides the AI agent and developers in establishing and maintaining **100% UI Consistency** across all pages, dialogs, components, and interactive elements of an application.
-
----
-
-## 1. Core Mandates (Quy Tắc Bắt Buộc)
-
-1. **Component-First Discipline (Cấm tự viết thẻ raw html tùy tiện trong React)**:
-   - ❌ **TUYỆT ĐỐI CẤM**: Tự tiện viết `<button className="...">`, `<input className="...">`, `<select className="...">` với class ad-hoc rời rạc trong mã nguồn ứng dụng.
-   - ✅ **BẮT BUỘC**: Tái sử dụng 100% Atomic Components từ `@/components/ui`:
-     - `<Button variant="..." size="..." icon={...}>`
-     - `<SearchInput value={...} onChange={...} />`
-     - `<Input label="..." error="..." {...props} />`
-     - `<Badge variant="...">`
-     - `<Card variant="..." rounded="...">`, `<CardHeader>`, `<CardContent>`
-     - `<PageHeader title="..." description="..." actions={...} />`
-     - `<Modal isOpen={...} onClose={...} title="..." icon={...}>`
-
-2. **Semantic Design Tokens (Dùng biến token ngữ nghĩa chuẩn)**:
-   - Sử dụng màu ngữ nghĩa: `blue-600` (brand/primary), `emerald-600` (success), `rose-600` (danger/delete), `amber-500` (warning), `slate-500` (captions/neutral).
-   - Tuyệt đối KHÔNG chế mã hex màu tùy tiện (`#123abc`) hoặc đưa màu sắc lạc điệu (như màu tím, cam rực rỡ không thuộc hệ thống) vào giao diện bảng dữ liệu.
-
-3. **Harmonized Geometry & Spacing (Hệ thống khoảng cách & bo góc chuẩn)**:
-   - **Border Radius**:
-     - `rounded-xl` (12px): Badges, inputs, compact buttons, dropdown items.
-     - `rounded-2xl` (16px): Primary buttons, medium cards, popovers, selection action bars.
-     - `rounded-3xl` (24px): Page cards, modal dialogs, main data containers.
-   - **Spacing Grid**: Bội số của 4px (`p-1` = 4px, `p-2` = 8px, `p-3` = 12px, `p-4` = 16px, `p-5` = 20px, `p-6` = 24px).
-
-4. **Screen Archetype Discipline (Phân biệt Bảng Dữ Liệu Chuyên Sâu vs Trang Tổng Quan)**:
-   - **Loại 1: Data-Dense Table Views (Đơn hàng PO/OD, Kho hàng, Nhà cung cấp)**:
-     - ❌ **TUYỆT ĐỐI CẤM**: Tự ý chèn Top Hero Banner gradient trang trí chiếm diện tích màn hình. Người dùng vận hành kho và thu mua cần tối đa hóa chiều cao nhìn thấy của bảng dữ liệu.
-     - ✅ **BẮT BUỘC**: Tuân thủ cấu trúc phân cấp chuẩn của `OrdersView.tsx`:
-       - **Toolbar Card** (`bg-white rounded-3xl p-4 border border-slate-200/80 shadow-xs space-y-3`):
-         - Hàng 1: Tabs trạng thái nghiệp vụ dạng pill-tabs (`bg-slate-100/90 rounded-2xl`) kèm phím tắt (F1-F4) và badge số lượng + Smart Sort + Zoom controls + Refresh button.
-         - Hàng 2: Nút Tìm Nhanh (Shift+F), Cài đặt cột, và Dải thao tác hàng loạt (`bg-blue-50/90 border border-blue-200/80 rounded-2xl`) tự động hiện khi chọn dòng.
-       - **Table Card** (`bg-white rounded-3xl border border-slate-200/80 shadow-xs flex-1 min-h-0`):
-         - Thanh chỉ dẫn đầu bảng (`h-10 bg-slate-50/70 border-b border-slate-100`) với **3 chấm tròn màu sắc chuẩn**: Tím Indigo (`bg-indigo-500` - kéo mép cột), Xanh dương (`bg-blue-500` - chọn nhiều dòng), Xanh lá (`bg-emerald-500` - sửa ô/xem thẻ).
-         - Thead dính `sticky top-0 bg-slate-100/95 backdrop-blur-xs text-[11px] font-bold text-slate-600 uppercase tracking-wider border-b border-slate-200/90`.
-         - Dòng chọn (Selected Row): Nền xanh nhạt `bg-blue-50/70`, chữ đậm `font-medium text-slate-900`, và vạch chỉ báo mép trái `border-l-4 border-l-blue-600`.
-         - Dòng không chọn: `hover:bg-blue-50/40 even:bg-slate-50/40 text-slate-700 border-l-4 border-l-transparent`.
-         - Chân bảng: Phân trang chuẩn và dải tóm tắt tổng số lượng then chốt.
-   - **Loại 2: Overview / Analytics Views (Dashboard)**: Cho phép sử dụng Hero Banner chào mừng hoặc thẻ KPI tổng hợp.
-
-5. **Batch Grid Modal Mandate (Chuẩn Hóa Hộp Thoại Xử Lý Hàng Loạt)**:
-   - Khi phát sinh nghiệp vụ tác động nhiều dòng (như Nhận hàng & HĐ, Nhập kho loạt, Xuất kho loạt):
-     - ❌ **CẤM**: Tạo popup đơn lẻ xử lý từng dòng gây thao tác lặp đi lặp lại tốn thời gian.
-     - ✅ **BẮT BUỘC**: Sử dụng Modal dạng Bảng lưới rộng `max-w-6xl` mô phỏng 1:1 theo `DeliverySettlementModal.tsx`:
-       - Header: Nền gradient tinh tế `from-blue-50 via-indigo-50/40 to-slate-50`, icon trong hộp `w-10 h-10 rounded-2xl bg-blue-600 text-white shadow-md shadow-blue-600/20`.
-       - Khối thông tin chung: `bg-slate-50 rounded-2xl border border-slate-200/80 p-4` (ngày thực hiện, số chứng từ, vị trí kho/bộ phận nhận, ghi chú).
-       - Bảng lưới chi tiết: Thao tác nhập số lượng từng dòng, có nút hành động nhanh "⚡ Điền đủ 100%".
-       - Anti-Negative Stock Guard: Với nghiệp vụ xuất kho, tự động so sánh số lượng xuất với tồn kho thực tế; nếu vượt quá tồn kho phải đổi viền đỏ `border-rose-500 bg-rose-50`, báo lỗi âm kho và khóa nút Lưu.
-       - Dải tổng hợp chân modal: `bg-blue-50/80 border border-blue-200 rounded-2xl p-3.5`.
-       - Footer: Nút Hủy `bg-white border-slate-200 text-slate-700`, Nút Lưu `bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-xs`.
-
-6. **Offline-First Mockup Mandate (Chuẩn Mockup HTML Ngoại Tuyến 100%)**:
-   - Khi tạo file Mockup tĩnh trong thư mục `mockup/*.html` để trình diễn cho người dùng duyệt theo `explicit-confirmation-gate`:
-     - ❌ **TUYỆT ĐỐI CẤM**: Nhúng bất kỳ đường dẫn CDN trực tuyến nào (`https://cdn.tailwindcss.com`, `cdnjs`, Google Fonts qua mạng). Mạng nội bộ doanh nghiệp/intranet sẽ chặn hoặc timeout các link này làm vỡ nát giao diện thành văn bản đen trắng thô sơ.
-     - ✅ **BẮT BUỘC**: File mockup HTML phải hoàn toàn **Offline-First**, tự chứa 100% CSS quy chuẩn (Self-Contained Embedded CSS) hoặc link tới file CSS nội bộ `dist/assets/`, và nhúng SVG Lucide icons trực tiếp (inline SVG).
-     - ✅ **BẮT BUỘC**: Trước khi tạo mockup, AI PHẢI đọc trực tiếp các view hiện hữu (`OrdersToolbar.tsx`, `OrdersTable.tsx`) làm **Vật Chuẩn Quy Chiếu (Anchor Reference)** để sao chép chuẩn xác từng mã màu, class bo góc, và cấu trúc layout.
-
-7. **The 4 Essential Data States (Đủ 4 trạng thái dữ liệu)**:
-   - Mọi bảng dữ liệu, danh sách và modal tương tác bắt buộc phải hỗ trợ đủ 4 trạng thái:
-     1. **Loading State**: Skeleton hoặc spinner tải dữ liệu mượt mà.
-     2. **Empty State**: Minh họa trực quan khi chưa có dữ liệu kèm nút hành động.
-     3. **Error State**: Thông báo lỗi rõ ràng kèm nút thử lại (`Retry`).
-     4. **Success State**: Dữ liệu hiển thị chuẩn mực kèm phân trang/cuộn mượt.
-
-8. **Unified Iconography**:
-   - Chỉ sử dụng Lucide icons (`lucide-react` hoặc inline SVG tương đương).
-   - Kích thước chuẩn: `w-3.5 h-3.5` (compact), `w-4 h-4` (standard), `w-5 h-5` (headers).
+Bộ kỹ năng này là **Cổng Kiến Trúc Giao Diện Bắt Buộc (Mandatory UI Architectural Gate)** nhằm thiết lập và duy trì **Tính Nhất Quán 100% (100% UI Consistency)**, chuẩn hóa Design Tokens, tái sử dụng triệt để Atomic Components và đảm bảo mỗi dự án sở hữu một bộ Component chuẩn mực độc lập không bao giờ nhầm lẫn.
 
 ---
 
-## 2. Standard Page Blueprint (Khung Mẫu Trang Chuẩn)
+## 0. Quy Tắc Bất Biến Bắt Buộc (Non-Negotiable Core Invariants)
 
-### Mẫu 1: Data-Dense Table View (Dành cho Đơn hàng, Kho bãi, Danh mục)
-```tsx
-import React, { useState } from 'react';
-import { Package, Search, RefreshCw, ZoomIn, ZoomOut } from 'lucide-react';
+### 0.1 ❌ LỆNH CẤM THẺ RAW HTML (ZERO-RAW-HTML INVARIANCE)
+Trong mọi trang (Pages), phân hệ (Modules), màn hình (Views), hộp thoại (Modals):
+- **TUYỆT ĐỐI CẤM** việc viết trực tiếp các thẻ HTML thô:
+  - ❌ CẤM `<input className="...">` $\rightarrow$ **BẮT BUỘC DÙNG `<SearchInput />` hoặc `<Input />`** từ `@/components/ui`.
+  - ❌ CẤM `<button className="...">` $\rightarrow$ **BẮT BUỘC DÙNG `<Button />` hoặc `<IconButton />`** từ `@/components/ui`.
+  - ❌ CẤM `<select className="...">` $\rightarrow$ **BẮT BUỘC DÙNG `<Select />`** từ `@/components/ui`.
+  - ❌ CẤM `<div className="... border-dashed ...">` $\rightarrow$ **BẮT BUỘC DÙNG `<EmptyState />`** từ `@/components/ui`.
+  - ❌ CẤM popup/modal tự chế $\rightarrow$ **BẮT BUỘC DÙNG `<Modal />`** từ `@/components/ui`.
+- Mọi tương tác giao diện bắt buộc phải đi qua các khối nguyên tử được định nghĩa tại `@/components/ui`.
 
-export const MyStandardTableView: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('ALL');
+---
 
-  return (
-    <div className="flex flex-col gap-3 h-full flex-1 w-full min-h-0">
-      {/* 1. Toolbar Card (Bo tròn rounded-3xl) */}
-      <div className="bg-white rounded-3xl p-4 border border-slate-200/80 shadow-xs space-y-3 shrink-0">
-        <div className="flex items-center justify-between gap-3">
-          {/* Pill Tabs */}
-          <div className="flex items-center gap-1 p-1 bg-slate-100/90 rounded-2xl">
-            <button className="px-3 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-md shadow-blue-600/20">
-              Tất cả
-            </button>
-          </div>
-          {/* Right Controls */}
-          <div className="flex items-center gap-2">
-            <button className="p-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors">
-              <RefreshCw className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </div>
+### 0.2 🏛️ KIẾN TRÚC HAI TẦNG & CHUẨN HÓA THEO TỪNG DỰ ÁN (DUAL-TIER PROJECT-LEVEL INVARIANCE)
+Hệ thống vận hành theo cơ chế 2 tầng phân tách độc lập:
 
-      {/* 2. Main Table Card */}
-      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col flex-1 w-full min-h-0">
-        {/* Table Guide Header */}
-        <div className="h-10 px-3 border-b border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500 bg-slate-50/70 shrink-0">
-          <span>Đang xem: 1 – 300 dòng</span>
-          <div className="flex items-center gap-3 text-[11px] text-slate-400">
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-indigo-500" /> Kéo cột</span>
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-500" /> Chọn dòng</span>
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500" /> Sửa ô</span>
-          </div>
-        </div>
-        {/* Scrollable Table Content */}
-        <div className="flex-1 overflow-auto">
-          {/* Table content goes here */}
-        </div>
-      </div>
-    </div>
-  );
-};
+```mermaid
+flowchart TD
+    subgraph T1["TẦNG 1: SKILL BASELINE DEFAULTS (Tham chiếu chuẩn ban đầu)"]
+        S1["Button, SearchInput, Input, Card, Badge, EmptyState, IconButton, Modal, PageHeader"]
+    end
+
+    subgraph T2A["TẦNG 2: DỰ ÁN A (src/components/ui/)"]
+        PA["Người dùng duyệt Button kiểu C"] --> SA["Thiết kế C trở thành CHUẨN DUY NHẤT của Button trong Dự án A"]
+    end
+
+    subgraph T2B["TẦNG 2: DỰ ÁN B (src/components/ui/)"]
+        PB["Người dùng duyệt Button kiểu D"] --> SB["Thiết kế D trở thành CHUẨN DUY NHẤT của Button trong Dự án B"]
+    end
+
+    T1 -->|Khởi tạo ban đầu| T2A
+    T1 -->|Khởi tạo ban đầu| T2B
+
+    style T1 fill:#f1f5f9,stroke:#64748b,stroke-width:2px;
+    style T2A fill:#dbeafe,stroke:#2563eb,stroke-width:2px;
+    style T2B fill:#fef3c7,stroke:#d97706,stroke-width:2px;
 ```
+
+1. **Tầng 1 - Thư viện Tham Chiếu Chuẩn Ban Đầu (Skill Baseline Defaults)**:
+   - Skill cung cấp bộ Component mẫu chuẩn mực ban đầu (chuẩn Raycast/Linear, height 44-48px, `rounded-2xl`, Design Tokens tối ưu).
+   - Đóng vai trò là "bộ gen chuẩn" khi dự án mới chưa có thiết kế riêng.
+
+2. **Tầng 2 - Chuẩn Được Duyệt Của Từng Dự Án (Project-Approved Standard - Single Source of Truth)**:
+   - Khi người dùng yêu cầu thiết kế lại một Component trong một dự án cụ thể (ví dụ Dự án A duyệt kiểu thiết kế C cho `Button`):
+     $\rightarrow$ **Kể từ thời điểm đó về sau, thiết kế C luôn là Component chuẩn mặc định cho toàn bộ Dự án A**.
+     Tất cả các màn hình, phân hệ cũ và mới trong Dự án A khi gọi `Button` đều kế thừa chuẩn C.
+   - Tương tự, nếu Dự án B duyệt kiểu thiết kế D cho `Button` $\rightarrow$ Dự án B vĩnh viễn dùng thiết kế D.
+   - **Hai dự án A và B có thể chạy song song mà không bao giờ bị nhầm lẫn hay ghi đè thiết kế của nhau**, vì mã nguồn chuẩn của từng dự án được lưu trữ độc lập tại `src/components/ui/` của chính dự án đó!
+
+---
+
+### 0.3 🛑 CỔNG XÁC NHẬN CHUẨN DỰ ÁN CHO COMPONENT MỚI (FIRST-DESIGN STANDARDIZATION APPROVAL GATE)
+Bất cứ khi nào phát sinh một Component tương tác:
+1. **Kiểm tra**: Nếu Component đó **chưa có trong thư viện của Skill** hoặc **chưa được thiết lập chuẩn cho dự án hiện tại**:
+2. **Quy tắc bắt buộc**: Khi thiết kế lần đầu, **AI LUÔN PHẢI HỎI VÀ XÁC NHẬN VỚI NGƯỜI DÙNG**:
+   > *"Anh có muốn lấy thiết kế [Tên_Component] này làm Component chuẩn cho toàn bộ dự án hiện tại không?"*
+3. **Sau khi người dùng xác nhận ĐỒNG Ý**:
+   - AI lập tức tạo hoặc cập nhật file Component tại `src/components/ui/[ComponentName].tsx`.
+   - Xuất khẩu chính thức tại `src/components/ui/index.ts`.
+   - Kể từ đó về sau, Component này chính thức trở thành chuẩn bất biến cho toàn bộ dự án. Tuyệt đối cấm tạo các biến thể ad-hoc rời rạc ở các màn hình khác!
+
+---
+
+## 1. Danh Mục Các Khối Nguyên Tử Cốt Lõi Tại `@/components/ui`
+
+Mọi dự án frontend chuẩn mực đều sở hữu tối thiểu 9 khối nguyên tử:
+
+| Component | Mục đích sử dụng | Quy chuẩn kích thước & hình học |
+| :--- | :--- | :--- |
+| **`<SearchInput />`** | Thanh tìm kiếm, ô lọc dữ liệu, ô search đa chiều | Chiều cao chuẩn **44px** (desktop) hoặc **48px**, bo góc `rounded-2xl`, icon kính lúp trái, nút xóa nhanh (`X`), slot nút hành động phải (`actionButton`), `shadow-xs`. |
+| **`<Input />`** | Ô nhập văn bản, số, mật khẩu, form dữ liệu | Chiều cao 40px, bo góc `rounded-xl` hoặc `rounded-2xl`, label rõ ràng, hỗ trợ icon prefix/suffix và thông báo lỗi. |
+| **`<Button />`** | Nút bấm hành động chính/phụ | `primary`, `secondary`, `outline`, `ghost`, `danger`, `success`. Chiều cao `sm` (32px), `md` (40px), `lg` (46px). Bo góc `rounded-xl`/`rounded-2xl`. Hỗ trợ `loading` spinner. |
+| **`<IconButton />`** | Nút icon thao tác nhanh trên dòng (phát âm, xóa, sửa, sao chép) | Vuông chuẩn `32x32px` hoặc `36x36px`, bo góc `rounded-xl`, màu hover nhẹ nhàng `hover:bg-slate-100` hoặc `hover:bg-blue-50`, tooltip gợi ý. |
+| **`<Card />`** | Khung chứa nội dung, panel, container | Bo góc `rounded-2xl` hoặc `rounded-3xl`, viền mảnh `border-slate-200/80`, biến thể `default`, `flat`, `bordered`, `dashed`, `hud`. |
+| **`<EmptyState />`** | Trạng thái chưa có dữ liệu (ảnh 3) | Khung viền nét đứt `border-2 border-dashed border-slate-200`, icon tròn nổi bật `w-12 h-12`, tiêu đề in đậm, mô tả hướng dẫn thao tác, nút kêu gọi hành động (CTA). |
+| **`<Badge />`** | Nhãn trạng thái, cấp độ, phân loại | Bo góc `rounded-xl` hoặc `rounded-full`, màu ngữ nghĩa (`brand`, `success`, `warning`, `danger`, `info`), hỗ trợ chấm tròn `dot`. |
+| **`<Modal />`** | Cửa sổ hộp thoại popup, xác nhận, nhập liệu | Lớp phủ nền mờ `backdrop-blur-xs`, hộp thoại bo góc `rounded-3xl`, bóng đổ lớn `shadow-2xl`, nút đóng `X`, hỗ trợ phím `Escape`. |
+| **`<PageHeader />`** | Tiêu đề trang đồng nhất | Tiêu đề `text-lg font-bold`, mô tả `text-xs text-slate-500`, dải nút thao tác bên phải. |
+
+---
+
+## 2. Hệ Thống Semantic Design Tokens Chuẩn
+
+1. **Màu sắc ngữ nghĩa (Color Palette)**:
+   - **Primary / Brand**: `blue-600` (hover: `blue-700`, active: `blue-800`, light: `blue-50`).
+   - **Success**: `emerald-600` (light: `emerald-50`, border: `emerald-200`).
+   - **Warning**: `amber-500` (light: `amber-50`, border: `amber-200`).
+   - **Danger / Error**: `rose-600` (light: `rose-50`, border: `rose-200`).
+   - **Neutral / Text**: Tiêu đề `text-slate-900`, nội dung `text-slate-700`, mô tả phụ `text-slate-500`, viền `border-slate-200`.
+
+2. **Hệ thống Bo Góc (Border Radius Discipline)**:
+   - `rounded-xl` (12px): Badges, inputs compact, icon buttons.
+   - `rounded-2xl` (16px): Primary buttons, search inputs, standard cards, list items.
+   - `rounded-3xl` (24px): Page containers, modal dialogs, large data tables.
+
+3. **Hệ thống Khoảng Cách (Spacing Grid - Bội số của 4px)**:
+   - `gap-2` (8px), `gap-3` (12px), `gap-4` (16px), `gap-6` (24px).
+   - Padding container: `p-4` (16px) hoặc `p-6` (24px).
 
 ---
 
 ## 3. CỔNG CHẶN KIỂM THỬ GIAO DIỆN TỰ ĐỘNG (AUTOMATED UI TEST GATE)
 
-- **Liên kết với `qa-verification`**:
-  - Bộ kiểm thử tự động `tests/test_qa_lifecycle.ts` (Tầng 3) quét toàn bộ mã nguồn của các module mới và thư mục `mockup/`:
-    1. **Quét Component React**: Bắt buộc dùng Atomic Components từ `@/components/ui`, cấm viết thẻ raw `<button className="...">` với class ad-hoc.
-    2. **Quét Mockup HTML**: Quét cấm triệt để link CDN online (`cdn.tailwindcss.com`, `cdnjs`), kiểm tra tính toàn vẹn Offline-First.
-    3. **Quét Semantic Tokens**: Quét bắt lỗi mã màu lạ ngoài hệ thống Design Token (như nút màu tím ngoài luồng, hex tùy tiện).
-  - Nếu phát hiện vi phạm: $\rightarrow$ **Test suite sẽ báo FAIL ngay lập tức và chặn đứng việc build/đóng gói ứng dụng**.
-
----
-
-## 4. Reference Documentation
-
-- [Design Tokens Specification](./references/design_tokens.md)
-- [Component Specifications & Props](./references/component_specs.md)
-- [UI/UX Quality Audit Checklist](./references/ui_ux_checklist.md)
-- [Standard Page Template](./examples/StandardPageTemplate.tsx)
-- [Component Usage Guide](./examples/ComponentUsageGuide.tsx)
-- [UI Consistency Audit Script](./scripts/audit_ui_consistency.ps1)
+Liên kết với `qa-verification` (Tầng 3):
+1. **Quét cấm thẻ HTML thô (Static Lint Gate)**:
+   - Bộ test tự động quét các file trong `src/modules/`: Nếu phát hiện thẻ raw `<input` hoặc `<button` được viết tùy tiện ngoài `@/components/ui` $\rightarrow$ **TEST SUITE BÁO FAIL NGAY LẬP TỨC**.
+2. **Kiểm tra xuất khẩu `@/components/ui/index.ts`**:
+   - Bắt buộc mọi Atomic Component chuẩn của dự án phải được đăng ký và xuất khẩu qua `index.ts`.
+3. **Bảo vệ tính toàn vẹn Zero-Regression**:
+   - Khi chỉnh sửa giao diện của một phân hệ, tuyệt đối không làm thay đổi props hoặc giao diện của các component dùng chung mà chưa được người dùng phê duyệt.
