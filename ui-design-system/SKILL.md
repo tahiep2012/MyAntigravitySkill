@@ -1,8 +1,9 @@
 ---
 name: ui-design-system
 description: >-
-  [CRITICAL UI ARCHITECTURAL GATE - MANDATORY ATOMIC COMPONENT STANDARDIZATION & ZERO-RAW-HTML INVARIANCE]
+  [CRITICAL UI ARCHITECTURAL GATE - MANDATORY PRE-CODE DESIGN SYSTEM SPECIFICATION, ATOMIC COMPONENT STANDARDIZATION & ZERO-RAW-HTML INVARIANCE]
   Enforces comprehensive UI/UX standardization, Design Tokens, atomic component reuse, and project-level design consistency.
+  TRƯỚC KHI VIẾT DÒNG CODE ĐẦU TIÊN: AI BẮT BUỘC PHẢI TẠO FILE DESIGN SYSTEM SPECIFICATION VÀ YÊU CẦU NGƯỜI DÙNG DUYỆT TRƯỚC KHI BẮT ĐẦU VÀO THIẾT LẬP DỰ ÁN.
   TUYỆT ĐỐI CẤM VIẾT THẺ THÔ (<input>, <button>, <select>, <textarea>) khi thiết kế giao diện.
   KHI THIẾT KẾ COMPONENT MỚI HOẶC TÁI THIẾT KẾ, AI BẮT BUỘC PHẢI HỎI VÀ XÁC NHẬN VỚI NGƯỜI DÙNG ĐỂ THIẾT LẬP LÀM CHUẨN DUY NHẤT CHO TOÀN BỘ DỰ ÁN ĐÓ.
   Mỗi dự án sở hữu bộ component chuẩn độc lập tại @/components/ui, không bao giờ nhầm lẫn thiết kế giữa các dự án chạy song song.
@@ -11,11 +12,28 @@ description: >-
 
 # UI Design System & Project-Level Component Standardization Skill
 
-Bộ kỹ năng này là **Cổng Kiến Trúc Giao Diện Bắt Buộc (Mandatory UI Architectural Gate)** nhằm thiết lập và duy trì **Tính Nhất Quán 100% (100% UI Consistency)**, chuẩn hóa Design Tokens, tái sử dụng triệt để Atomic Components và đảm bảo mỗi dự án sở hữu một bộ Component chuẩn mực độc lập không bao giờ nhầm lẫn.
+Bộ kỹ năng này là **Cổng Kiến Trúc Giao Diện Bắt Buộc (Mandatory UI Architectural Gate)** nhằm thiết lập và duy trì **Tính Nhất Quán 100% (100% UI Consistency)**, chuẩn hóa Design Tokens, bắt buộc lập bản đặc tả hệ thống thiết kế trước khi viết code, tái sử dụng triệt để Atomic Components và đảm bảo mỗi dự án sở hữu một bộ Component chuẩn mực độc lập không bao giờ nhầm lẫn.
 
 ---
 
 ## 0. Quy Tắc Bất Biến Bắt Buộc (Non-Negotiable Core Invariants)
+
+### 0.0 📜 CỔNG ĐẶC TẢ HỆ THỐNG THIẾT KẾ TRƯỚC KHI CODE (PRE-CODE DESIGN SYSTEM SPECIFICATION GATE)
+**QUY TẮC BẤT DI BẤT DỊCH**: Trước khi bắt đầu viết dòng code đầu tiên (hoặc khi khởi tạo dự án mới, khi thiết kế phân hệ giao diện mới):
+1. **BẮT BUỘC TẠO FILE DESIGN SYSTEM SPECIFICATION**:
+   - AI **TUYỆT ĐỐI KHÔNG ĐƯỢC PHÉP** viết bất kỳ file code dự án nào (`.tsx`, `.ts`, `.vue`, `.jsx`, `.rs`) khi chưa tạo tệp đặc tả hệ thống thiết kế (ví dụ: `docs/design_system_specification.md` hoặc `mockup/design_system_specification.html`).
+   - Bản đặc tả bắt buộc phải bao gồm đầy đủ 4 trụ cột:
+     - **Trụ cột 1: Design Tokens**: Bảng màu ngữ nghĩa (Brand, Semantic colors), Typography (Font gia đình, Scale kích thước, Weight độ đậm), Spacing Grid (bội số của 4px), Radius Hierarchy (`rounded-xl`, `rounded-2xl`, `rounded-3xl`), Shadows (`shadow-xs`, `shadow-hud`).
+     - **Trụ cột 2: Component Inventory & Matrix (Danh mục thành phần)**: Danh sách kiểm kê toàn bộ các Atomic Components sẽ sử dụng trong dự án (`SearchInput`, `EmptyState`, `IconButton`, `Button`, `Switch`, `Select`, `PillTabs`, `Input`, `Card`, `Badge`, `Modal`...) với đầy đủ các kích cỡ (`sm`/`md`/`lg`), biến thể (variants), và trạng thái (Default, Hover, Active, Disabled, Loading, Error).
+     - **Trụ cột 3: API & Data Contract**: Định nghĩa cấu trúc dữ liệu, Props, Callbacks giữa UI và Backend/Core logic để đảm bảo Frontend & Backend có thể phát triển song song mà không cần chờ đợi.
+     - **Trụ cột 4: Interactive Showcase Mockup**: Dựng tệp Mockup HTML tương tác sống (offline-first) để người dùng có thể mở trực tiếp trên trình duyệt bấm thử, gõ thử, kiểm tra trải nghiệm trước khi duyệt.
+2. **CỔNG CHỜ PHÊ DUYỆT TỪ NGƯỜI DÙNG (MANDATORY USER APPROVAL GATE)**:
+   - Sau khi tạo xong file Design System Specification và Mockup, AI **BẮT BUỘC PHẢI DỪNG LẠI, KHÔNG GỌI THÊM BẤT KỲ TOOL CODE NÀO**.
+   - Xuất trình đường dẫn tệp đặc tả và mockup, hỏi rõ ràng:
+     > *"Em đã lập xong bản Design System Specification và Mockup tương tác cho dự án. Mời anh xem qua và xác nhận: Anh có duyệt bộ tiêu chuẩn thiết kế này làm chuẩn duy nhất cho dự án để bắt đầu tiến hành viết code thiết lập dự án không?"*
+   - **CHỈ KHI VÀ CHỈ KHI** nhận được câu lệnh xác nhận/phê duyệt rõ ràng từ người dùng (ví dụ: *"Duyệt em nhé"*, *"Triển khai đi em"*), AI mới được phép bắt đầu viết dòng code dự án đầu tiên!
+
+---
 
 ### 0.1 ❌ LỆNH CẤM THẺ RAW HTML (ZERO-RAW-HTML INVARIANCE)
 Trong mọi trang (Pages), phân hệ (Modules), màn hình (Views), hộp thoại (Modals):

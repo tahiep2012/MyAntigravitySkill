@@ -68,8 +68,12 @@ graph TD
 ---
 
 ### 5. [`ui-design-system/SKILL.md`](./ui-design-system/SKILL.md)
-* **Mục tiêu**: Chuẩn hóa toàn diện phong cách thẩm mỹ, trải nghiệm người dùng (UI/UX) và bộ Design Tokens xuyên suốt toàn bộ ứng dụng.
-* **Quy tắc vàng**: 100% giao diện nhất quán về hệ thống màu sắc (Color Tokens), khoảng cách (Spacing & Padding), bo góc (Border Radius), phông chữ và các khối nguyên tử tái sử dụng (`Button`, `Badge`, `SearchInput`, `Card`, `Modal`, `PageHeader`). Đảm bảo đủ 4 trạng thái UI (Loading, Empty, Error, Success).
+* **Mục tiêu**: Chuẩn hóa toàn diện phong cách thẩm mỹ, trải nghiệm người dùng (UI/UX), bộ Design Tokens, bất biến Zero-Raw-HTML và bắt buộc lập đặc tả hệ thống thiết kế trước khi viết code.
+* **Quy tắc vàng**:
+  1. **Cổng đặc tả trước khi code (Pre-Code Design System Specification Gate)**: Trước khi viết dòng code đầu tiên, AI **BẮT BUỘC PHẢI TẠO FILE DESIGN SYSTEM SPECIFICATION** và tệp **Mockup tương tác**, sau đó xuất trình và **CHỜ NGƯỜI DÙNG DUYỆT TRỰC TIẾP** mới được bắt đầu lập trình.
+  2. **Bất biến Zero-Raw-HTML (Zero-Raw-HTML Invariance)**: 100% phần tử giao diện phải nhập khẩu từ `@/components/ui`. Tuyệt đối cấm viết thẻ HTML thô (`<input>`, `<select>`, `<button>`, raw dashed `<div>`).
+  3. **Chuẩn hóa cấp dự án (Project-Level Standardization)**: Mỗi dự án sở hữu bộ component chuẩn độc lập tại `@/components/ui`, nhiều dự án chạy song song không bao giờ xung đột thiết kế.
+  4. **Cổng phê duyệt thiết kế lần đầu (First-Design Approval Gate)**: Khi component mới xuất hiện, AI bắt buộc phải hỏi người dùng có muốn lấy làm chuẩn cho toàn dự án hay không.
 
 ---
 
