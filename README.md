@@ -1,34 +1,52 @@
-# Bộ Kỹ Năng Kỹ Thuật Chuẩn Mực Cho Google Antigravity (Antigravity Skills Suite)
+# Hệ Sinh Thái Kỹ Năng Kỹ Thuật & Thẩm Mỹ Chuẩn Mực Cho Google Antigravity (Antigravity Skills Suite)
 
-Kho lưu trữ này chứa **Bộ Ngũ Trụ Cột Kỹ Thuật (The Five Pillars)** được thiết kế chuyên biệt cho Google Antigravity để tái sử dụng vĩnh viễn trên mọi dự án phần mềm Desktop (Tauri/Electron/Qt) và Website (React/Next.js/Vue):
+Kho lưu trữ này chứa **Trọn Bộ 11 Kỹ Năng Đẳng Cấp Công Nghiệp (Full 11-Skills Suite)** được thiết kế và tối ưu chuyên biệt cho Google Antigravity để tái sử dụng vĩnh viễn trên mọi dự án phần mềm Desktop (Tauri/Electron/Qt) và Web App (React/Next.js/Vue):
 
 ---
 
-## 🏛️ Bộ Ngũ Trụ Cột Kỹ Thuật (The Five Pillars)
+## 🏛️ Sơ Đồ Hệ Thống 11 Kỹ Năng (The 11 Master Skills)
 
 ```mermaid
 graph TD
-    Pillar1["1. Explicit Confirmation Gate<br/>(Cổng Kiểm Soát Hành Vi)"]
-    Pillar2["2. QA Verification<br/>(Cổng Kiểm Định Chất Lượng 5 Tầng)"]
-    Pillar3["3. Modular Architecture<br/>(Kiến Trúc Module Hóa)"]
-    Pillar4["4. Spec-Driven Dev<br/>(Đặc Tả & Mỏ Neo Đĩa Cứng)"]
-    Pillar5["5. UI Design System<br/>(Chuẩn Hóa Giao Diện)"]
+    subgraph Arch["🏛️ PHẦN I: BỘ NGŨ TRỤ CỘT KIẾN TRÚC & KỶ LUẬT"]
+        P1["1. Explicit Confirmation Gate<br/>(Cổng Kiểm Soát Hành Vi)"]
+        P2["2. QA Verification<br/>(Cổng Kiểm Định 5 Tầng)"]
+        P3["3. Modular Architecture<br/>(Kiến Trúc Module Hóa)"]
+        P4["4. Spec-Driven Dev<br/>(Đặc Tả & Mỏ Neo Đĩa Cứng)"]
+        P5["5. UI Design System<br/>(Chuẩn Hóa Giao Diện & Spec Gate)"]
+    end
 
-    Pillar1 --> Core["PHẦN MỀM CHUYÊN NGHIỆP<br/>BỀN BỈ & ĐẲNG CẤP"]
-    Pillar2 --> Core
-    Pillar3 --> Core
-    Pillar4 --> Core
-    Pillar5 --> Core
+    subgraph AntiSlop["🛡️ PHẦN II: BỘ LỤC KỸ NĂNG ANTI-SLOP & THẨM MỸ"]
+        S1["6. antislop<br/>(Bộ Lọc Lõi Chống Rập Khuôn)"]
+        S2["7. antislop-ui<br/>(Thẩm Mỹ UI Tinh Tế)"]
+        S3["8. antislop-code<br/>(Dọn Rác Comment AI)"]
+        S4["9. antislop-copywriting<br/>(Văn Phong Thực & Anti-Buzzwords)"]
+        S5["10. antislop-human<br/>(Accessibility & WCAG Contrast)"]
+        S6["11. antislop-layoutmobile<br/>(Bố Cục Responsive Đa Màn Hình)"]
+    end
 
-    style Pillar1 fill:#fee2e2,stroke:#ef4444,stroke-width:2px;
-    style Pillar2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px;
-    style Pillar3 fill:#dbeafe,stroke:#2563eb,stroke-width:2px;
-    style Pillar4 fill:#fef3c7,stroke:#d97706,stroke-width:2px;
-    style Pillar5 fill:#fce7f3,stroke:#db2777,stroke-width:2px;
-    style Core fill:#f8fafc,stroke:#0f172a,stroke-width:3px;
+    Arch --> Core["💎 PHẦN MỀM CHUYÊN NGHIỆP<br/>BỀN BỈ, ĐẲNG CẤP & TINH TẾ"]
+    AntiSlop --> Core
+
+    style P1 fill:#fee2e2,stroke:#ef4444,stroke-width:2px;
+    style P2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px;
+    style P3 fill:#dbeafe,stroke:#2563eb,stroke-width:2px;
+    style P4 fill:#fef3c7,stroke:#d97706,stroke-width:2px;
+    style P5 fill:#fce7f3,stroke:#db2777,stroke-width:2px;
+
+    style S1 fill:#f3e8ff,stroke:#9333ea,stroke-width:2px;
+    style S2 fill:#e0e7ff,stroke:#4f46e5,stroke-width:2px;
+    style S3 fill:#f1f5f9,stroke:#475569,stroke-width:2px;
+    style S4 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px;
+    style S5 fill:#ccfbf1,stroke:#0d9488,stroke-width:2px;
+    style S6 fill:#ffedd5,stroke:#ea580c,stroke-width:2px;
+
+    style Core fill:#0f172a,stroke:#38bdf8,stroke-width:3px,color:#ffffff;
 ```
 
 ---
+
+## 🏛️ PHẦN I: BỘ NGŨ TRỤ CỘT KIẾN TRÚC & KỶ LUẬT (THE FIVE PILLARS)
 
 ### 1. [`explicit-confirmation-gate/SKILL.md`](./explicit-confirmation-gate/SKILL.md)
 * **Mục tiêu**: Đảm bảo quyền kiểm soát tuyệt đối của con người đối với mã nguồn (Human-in-the-loop).
@@ -77,14 +95,67 @@ graph TD
 
 ---
 
+## 🛡️ PHẦN II: BỘ LỤC KỸ NĂNG ANTI-SLOP & THẨM MỸ CAO CẤP (ANTI-SLOP SUITE)
+
+### 6. [`antislop/SKILL.md`](./antislop/SKILL.md)
+* **Mục tiêu**: Bộ điều phối trung tâm chống hiện tượng "AI Slop" — những sản phẩm công nghệ rập khuôn, chung chung, sáo rỗng do AI sinh ra tự động.
+* **Quy tắc vàng**:
+  * Đảm bảo sản phẩm tạo ra trông như được **thiết kế thủ công bởi Designer chuyên nghiệp** (crafted by a designer), không phải do AI vẽ bừa.
+  * Thiết lập tư duy thiết kế có định hướng, nói KHÔNG với các mẫu giao diện AI mặc định buồn ngủ, đơn điệu.
+
+---
+
+### 7. [`antislop-ui/SKILL.md`](./antislop-ui/SKILL.md)
+* **Mục tiêu**: Nâng tầm thẩm mỹ giao diện, dập tắt các thói quen thiết kế cẩu thả của AI.
+* **Quy tắc vàng**:
+  * Loại bỏ hoàn toàn các dải màu tím/hồng neon vô nghĩa, hiệu ứng glow phát sáng thừa thãi, các thẻ card lơ lửng mất gốc.
+  * Phân tầng thị giác rõ ràng (Visual Hierarchy), bóng đổ (Shadows) có chiều sâu thực tế, chuyển động (Motion/Transitions) mượt mà có mục đích.
+
+---
+
+### 8. [`antislop-code/SKILL.md`](./antislop-code/SKILL.md)
+* **Mục tiêu**: Dọn sạch rác chú thích mã nguồn do AI sinh ra theo quán tính (Comment Hygiene).
+* **Quy tắc vàng**:
+  * Tự động quét và loại bỏ các chú thích hiển nhiên, vô bổ (kiểu `// this is a function`, `// initialize state`, `// handle click`).
+  * Chỉ giữ lại các comment giải thích **tại sao (Why)** chứ không giải thích cái đang viết hiển nhiên **(What)**.
+  * **Bất biến**: Tuyệt đối không thay đổi bất kỳ logic code nào khi dọn dẹp comment.
+
+---
+
+### 9. [`antislop-copywriting/SKILL.md`](./antislop-copywriting/SKILL.md)
+* **Mục tiêu**: Viết nội dung, tiêu đề, nút bấm (CTA) chuẩn văn phong con người, đanh thép và tự nhiên.
+* **Quy tắc vàng**:
+  * Cấm các sáo ngữ và từ đệm AI kinh điển: *"delve into"*, *"unlock the power of"*, *"tapestry"*, *"game-changer"*, *"seamlessly"*, *"revolutionize"*.
+  * Viết câu chữ ngắn gọn, đi thẳng vào vấn đề, trung thực và chạm đúng nhu cầu người dùng.
+
+---
+
+### 10. [`antislop-human/SKILL.md`](./antislop-human/SKILL.md)
+* **Mục tiêu**: Tối ưu khả năng tiếp cận (Accessibility) và trải nghiệm cho người dùng bằng xương bằng thịt.
+* **Quy tắc vàng**:
+  * Kiểm soát độ tương phản màu chuẩn quốc tế WCAG (đi kèm script Python `contrast-check.py`).
+  * Hỗ trợ điều hướng bằng bàn phím hoàn chỉnh với vòng sáng tiêu điểm (Focus Ring) rõ ràng cho người khiếm thị/khuyết tật.
+  * Đảm bảo đủ các trạng thái người dùng (Hover, Focus, Active, Disabled).
+
+---
+
+### 11. [`antislop-layoutmobile/SKILL.md`](./antislop-layoutmobile/SKILL.md)
+* **Mục tiêu**: Xây dựng layout co giãn thích ứng hoàn hảo trên mọi kích thước màn hình từ điện thoại đến máy tính.
+* **Quy tắc vàng**:
+  * Kiểm soát lưới (Grid), phân bố Breakpoints khoa học, chống hiện tượng tràn màn hình ngang (Horizontal Overflow).
+  * Đảm bảo vùng chạm cảm ứng tối thiểu (Tap Target Size $\ge 44 \times 44\text{px}$) cho thao tác ngón tay trên thiết bị di động.
+
+---
+
 ## 🚀 HƯỚNG DẪN CÀI ĐẶT NHANH SANG MÁY TÍNH MỚI
 
 ### Cách 1: Cài đặt tự động bằng 1-Click (Khuyến nghị cho Windows)
 1. Tải về hoặc giải nén thư mục này trên máy tính của bạn.
 2. Click đúp chuột vào file **`install.bat`** (hoặc chạy lệnh: `powershell -ExecutionPolicy Bypass -File install.ps1`).
 3. Chọn chế độ cài đặt:
-   - **Phím 1**: Cài đặt 3 Skill cốt lõi (`explicit-confirmation-gate`, `qa-verification`, `modular-architecture`).
-   - **Phím 2** *(Mặc định - Khuyến nghị)*: Cài đặt toàn bộ 5 Skill chuẩn mực đầy đủ.
+   - **Phím 1**: Cài đặt Bộ 5 Trụ Cột Kiến Trúc (`explicit-confirmation-gate`, `qa-verification`, `modular-architecture`, `spec-driven-development`, `ui-design-system`).
+   - **Phím 2**: Cài đặt Bộ 6 Kỹ Năng Anti-Slop (`antislop`, `antislop-ui`, `antislop-code`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`).
+   - **Phím 3** *(Mặc định - Khuyến nghị)*: Cài đặt **TRỌN BỘ TOÀN DIỆN 11 KỸ NĂNG**.
 4. Xong! Toàn bộ Skill sẽ được tự động cài chính xác vào `%USERPROFILE%\.gemini\config\skills\`.
 
 ### Cách 2: Cài đặt bằng Git Clone (Nhanh nhất cho lập trình viên)
@@ -98,7 +169,7 @@ Hoặc clone về thư mục tạm rồi chạy file `install.bat`.
 
 ## 🗑️ GỠ CÀI ĐẶT
 
-Nếu muốn gỡ bỏ các skill này khỏi Antigravity, chỉ cần chạy script:
+Nếu muốn gỡ bỏ toàn bộ 11 skill này khỏi Antigravity, chỉ cần chạy script:
 ```powershell
 powershell -ExecutionPolicy Bypass -File uninstall.ps1
 ```
