@@ -5,6 +5,8 @@ description: >-
   Enforces comprehensive UI/UX standardization, Design Tokens, atomic component reuse, and project-level design consistency.
   TRƯỚC KHI VIẾT DÒNG CODE ĐẦU TIÊN: AI BẮT BUỘC PHẢI TẠO FILE DESIGN SYSTEM SPECIFICATION VÀ YÊU CẦU NGƯỜI DÙNG DUYỆT TRƯỚC KHI BẮT ĐẦU VÀO THIẾT LẬP DỰ ÁN.
   TUYỆT ĐỐI CẤM VIẾT THẺ THÔ (<input>, <button>, <select>, <textarea>) khi thiết kế giao diện.
+  TUYỆT ĐỐI CẤM DÙNG SIBLING SPACING (space-y-*) TRÊN CONTAINER CHỨA CÁC TAB/PANEL CHUYỂN ĐỔI ẨN HIỆN.
+  BẮT BUỘC BẤT BIẾN 100% TỌA ĐỘ Y CHO CÁC PANEL NGANG HÀNG (PEER VIEW COORDINATE INVARIANCE).
   KHI THIẾT KẾ COMPONENT MỚI HOẶC TÁI THIẾT KẾ, AI BẮT BUỘC PHẢI HỎI VÀ XÁC NHẬN VỚI NGƯỜI DÙNG ĐỂ THIẾT LẬP LÀM CHUẨN DUY NHẤT CHO TOÀN BỘ DỰ ÁN ĐÓ.
   Mỗi dự án sở hữu bộ component chuẩn độc lập tại @/components/ui, không bao giờ nhầm lẫn thiết kế giữa các dự án chạy song song.
   The AI agent MUST view and execute this skill whenever designing new screens, creating UI components, styling layouts, or reviewing frontend code.
@@ -97,6 +99,38 @@ Bất cứ khi nào phát sinh một Component tương tác:
 
 ---
 
+### 0.4 🚫 LỆNH CẤM SIBLING SPACING TRÊN MULTI-VIEW CONTAINER (ZERO-SIBLING-SPACING ON TAB SWITCHERS)
+Khi một container cha chứa các view, phân hệ, hoặc panel con được chuyển đổi ẩn/hiện (`hidden`, `display: none`, hoặc conditional tabs):
+1. **TUYỆT ĐỐI CẤM DÙNG `space-y-*`, `space-x-*` HOẶC `gap-*` (TRÊN FLEX/GRID CÓ CHỨA CÁC THẺ ẨN HIỆN)**:
+   - Các bộ chọn khoảng cách anh-chị-em của CSS (như `> :not([hidden]) ~ :not([hidden])` hoặc `> * + *` của Tailwind CSS) sẽ gây ra **Lỗi Lệch Vị Trí Kinh Điển**:
+     - Panel con thứ nhất (`:first-child`) có `margin-top: 0px`.
+     - Panel con thứ 2, 3, 4 khi được kích hoạt (`display: block`) lại là con thứ 2, 3, 4 trong DOM $\rightarrow$ bị trình duyệt ép nhận `margin-top: 1rem` ($+16\text{px}$ đến $+18\text{px}$), khiến vị trí tiêu đề của các bảng sau luôn bị tụt sâu hơn bảng đầu tiên!
+2. **GIẢI PHÁP BẮT BUỘC (SELF-CONTAINED PANEL BOUNDING)**:
+   - Thẻ cha bao bọc danh sách các panel chỉ giữ vai trò là khung cuộn (`overflow-y-auto`) và đệm lề ngoài (`p-6` hoặc `p-8`).
+   - Tuyệt đối cấm đặt bất kỳ tiện ích `space-y-*` nào lên thẻ cha này.
+   - Mỗi panel con phải là một khối độc lập hoàn chỉnh (`margin-top: 0`), tự quản lý khoảng cách nội bộ của chính mình.
+
+---
+
+### 0.5 📏 BẤT BIẾN TỌA ĐỘ VÀ CHIỀU CAO HEADER TRÊN CÁC PANEL NGANG HÀNG (PEER VIEW COORDINATE INVARIANCE)
+Trong mọi giao diện có nhiều phân mục hoặc tab ngang hàng (ví dụ: Chrome Settings, Preferences, Dashboard Tabs, Master-Detail):
+1. **BẤT BIẾN TỌA ĐỘ TRỤC Y (PIXEL-PERFECT Y COORDINATE)**:
+   - Tọa độ $Y$ bắt đầu của Tiêu đề Panel (`titleTop`) và tọa độ $Y$ bắt đầu của Thẻ Nội Dung đầu tiên (`cardTop`) **BẮT BUỘC PHẢI BẰNG NHAU 100% TRÊN TẤT CẢ CÁC PANEL**.
+   - Bấm chuyển qua bất kỳ bảng nào, mắt người dùng tuyệt đối không được thấy hiện tượng tiêu đề hoặc thẻ bên dưới bị nhảy lên nhảy xuống hay thụt thò.
+2. **CHUẨN HÓA KHUNG HEADER PANEL (STANDARDIZED HEADER CONTAINER)**:
+   - Header của mọi panel ngang hàng phải tuân thủ cùng một cấu trúc kích thước:
+     - Tiêu đề: Đặt ngắn gọn, súc tích, cùng cấp độ font (`text-base font-bold leading-none`).
+     - Dòng mô tả (Subtitle): Chuẩn hóa số dòng hiển thị tương đương (hoặc cố định `min-height` của header) để triệt tiêu hiệu ứng Domino xê dịch thẻ card bên dưới.
+3. **BẮT BUỘC RESET VỊ TRÍ CUỘN KHI ĐỔI TAB (`scrollTop = 0`)**:
+   - Khi người dùng click chuyển sang tab hoặc panel khác, code xử lý chuyển tab **BẮT BUỘC** phải gọi:
+     `scrollContainer.scrollTop = 0;`
+   - Điều này triệt tiêu hoàn toàn lỗi lưu vết cuộn từ tab trước làm xô lệch tab kế tiếp.
+4. **HIỆU ỨNG CHUYỂN TAB THUẦN TÚY OPACITY (ZERO-TRANSLATE ANIMATION)**:
+   - Khi chuyển panel, chỉ sử dụng hiệu ứng mờ dần thuần túy (`opacity` fade-in từ 0 đến 1).
+   - **TUYỆT ĐỐI CẤM** dùng `translateY` hoặc `translateX` trong animation chuyển tab vì sẽ gây ra hiện tượng giật cục vị trí pixel giữa các lần nhấp chuột.
+
+---
+
 ## 1. Danh Mục Các Khối Nguyên Tử Cốt Lõi Tại `@/components/ui`
 
 Mọi dự án frontend chuẩn mực đều sở hữu tối thiểu 9 khối nguyên tử:
@@ -144,3 +178,5 @@ Liên kết với `qa-verification` (Tầng 3):
    - Bắt buộc mọi Atomic Component chuẩn của dự án phải được đăng ký và xuất khẩu qua `index.ts`.
 3. **Bảo vệ tính toàn vẹn Zero-Regression**:
    - Khi chỉnh sửa giao diện của một phân hệ, tuyệt đối không làm thay đổi props hoặc giao diện của các component dùng chung mà chưa được người dùng phê duyệt.
+4. **Kiểm tra Tọa độ Bố cục trên Mockup (Mockup Pixel Coordinate Verification)**:
+   - Khi dựng file Mockup tương tác trước khi trình bày cho người dùng, AI phải tự giác kiểm tra hoặc chạy script đo đạc tọa độ Y (`getBoundingClientRect().top`) của từng tab/panel ngang hàng để đảm bảo độ cân bằng và đồng nhất 100% về khoảng cách.
